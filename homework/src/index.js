@@ -40,6 +40,27 @@
     }*/
     data.sort((a, b) => a.name.localeCompare(b.name));
 
+    createAndAppend("div", description, {id: "description1"});
+    createAndAppend("h5", description1, {id:"repository", text: "Repository: ", class: "headings"});
+    createAndAppend("p", description1, {id: "repositoryName", class:"text" });
+    let repositoryName = document.getElementById("repositoryName");
+
+    createAndAppend("div", description, {id: "description2"});
+    createAndAppend("h5", description2, {id:"descriptionTitle", text: "Descritpion: ", class: "headings"});
+    createAndAppend("p", description2, {id:"descriptionText", class:"text" });
+    let descriptionText = document.getElementById("descriptionText")
+
+    createAndAppend("div", description, {id:"description3"});
+    createAndAppend("h5", description3, {id:"fork", text: "Forks: ", class: "headings"});
+    createAndAppend("p", description3, {id: "forkText", class: "text" });
+    let forkText = document.getElementById("forkText")
+
+    createAndAppend("div", description, {id:"description4"});
+    createAndAppend("h5", description4, {id:"update", text:"Updated: ", class: "headings"});
+    createAndAppend("p", description4, {id:"updateText", class:"text" });
+    let updateText = document.getElementById("updateText")
+
+
     let repoName = [];
     let repoDescription= [];
     let repoFork = [];
@@ -83,7 +104,7 @@
   function printRepoContent(arr, option, name, description, fork, update){
     for(let i = 0; i < arr.length; i++){
       if(option == i){
-        
+
       }
     }
   }
