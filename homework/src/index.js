@@ -40,6 +40,7 @@
     }*/
     data.sort((a, b) => a.name.localeCompare(b.name));
 
+    //blocks of content within the descriptive block
     createAndAppend("div", description, {id: "description1"});
     createAndAppend("h5", description1, {id:"repository", text: "Repository: ", class: "headings"});
     createAndAppend("p", description1, {id: "repositoryName", class:"text" });
@@ -101,10 +102,14 @@
     }
   }
 
-  function printRepoContent(arr, option, name, description, fork, update){
+  //fill the content of the descritive block
+  function printRepoContent(arr, option, name, description, forks, update){
     for(let i = 0; i < arr.length; i++){
       if(option == i){
-
+        repositoryName.innerHTML = "<a href= '#' target='_blank'>" + name[i] + "</a>";
+        descriptionText.innerHTML = description[i];
+        forkText.innerHTML = forks[i];
+        updateText.innerHTML = update[i];
       }
     }
   }
