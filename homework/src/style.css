@@ -1,3 +1,65 @@
 .alert-error {
     color: red;
 }
+
+div, p, li {
+    border: 2px double black;
+}
+
+#top {
+    border: 2px double black;
+    width: 100%;
+    align-items: baseline;
+    display: flex;
+    flex-flow: row nowrap;
+    align-content: center;
+    align-items: baseline;
+    justify-content: flex-start;
+}
+
+.contributorsHeader {
+    padding: 10px;
+}
+
+.contributorItem {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    padding: 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.16);
+}
+
+.contributorName {
+    flex: 1;
+    padding: 0 10px;
+}
+
+.contributorBadge {
+    color: white;
+    background-color: #6e6e6e;
+    padding: 5px;
+    border-radius: 50%;
+}
+ul {
+    list-style: none;
+}
+
+img {
+    height: 5em;
+    width: auto;
+}
+
+#root {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 1em;
+    margin: 10px 5px;
+
+}
+#root > div,
+#root > table {
+    flex: 1;
+    margin: 10px 5px;
+    background-color: white;
+}

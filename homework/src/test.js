@@ -40,6 +40,7 @@
     }*/
     data.sort((a, b) => a.name.localeCompare(b.name));
 
+ 
     selectRepository(data) //1repository list callback
     descriptiveBlock(data[0]);
     contributorsList(data[0]);
@@ -120,3 +121,5 @@ function contributorsList(element){
 }//end function contributorsList
   
 }
+
+
