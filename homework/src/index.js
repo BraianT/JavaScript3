@@ -44,22 +44,18 @@
     descriptiveBlock(data[0]);
     contributorsList(data[0]);
 
-
     document.getElementById("repoList").onchange = function(){
         let selectedItemIndex = this.options[this.selectedIndex].value;
-        let table = document.getElementById("RepositoryOverwiew");
+        let table = document.getElementById("descriptionContent");
         table.parentNode.removeChild(table);
         let contributors = document.getElementById('contributorsBlock');
         contributors.parentNode.removeChild(contributors);
 
         descriptiveBlock(data[selectedItemIndex])
         contributorsList(data[selectedItemIndex])
-    }
-    //let select = document.getElementById("repositoryMenu");
-    //select.addEventListener("change", function (){ 
-    //})
+    }//listener
 
-    });
+    }); //fetch JSON
   }//main
 
   const HYF_REPOS_URL = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';
@@ -80,9 +76,8 @@
  
 
 function descriptiveBlock(element){
-    let container =  document.querySelector("#description");
     //creating table for repository overwiew 
-    let table = createAndAppend("table", container, {id: "RepositoryOverwiew"});
+    let table = createAndAppend("table", description, {id: "descriptionContent"});
     let repoRow = createAndAppend("tr", table);
     //creating row for repository and link 
     createAndAppend("td", repoRow, {text:"Repository:"})
@@ -106,15 +101,15 @@ function descriptiveBlock(element){
 
 function contributorsList(element){
     fetchJSON(element.contributors_url, (err, data) => {
-        let right= createAndAppend('div', root, {id: "contributorsBlock", class: "block"});
-        createAndAppend("p", right,{class: "title" , text: "Contributors"} );
-        let ul = createAndAppend("ul", right, {class: "contributorsList"});
+        createAndAppend('div', root, {id: "contributorsBlock", class: "block"});
+        createAndAppend("p", contributorsBlock, {class: "title" , text: "Contributors"} );
+        let ul = createAndAppend("ul", contributorsBlock, {id: "contributorsList"});
        
         for(let i = 0; i<data.length; i++){
             let li = createAndAppend("li",ul, {class: "contributorItem"} );
-            let img = createAndAppend("img", li, {src:data[i].avatar_url, class: "contributorsAvatar"}) 
-            let login = createAndAppend("a", li, {text: data[i].login, href:data[i].html_url, target: "_blank", class:"contributorName"});
-            let badge = createAndAppend("p", li,{text: data[i].contributions, class:"contributorBadge"} );
+            createAndAppend("img", li, {src:data[i].avatar_url, class: "contributorsAvatar"}) 
+            createAndAppend("a", li, {text: data[i].login, href:data[i].html_url, target: "_blank", class:"contributorName"});
+            createAndAppend("p", li,{text: data[i].contributions, class:"contributorBadge"} );
         }
     });
 }//end function contributorsList
