@@ -17,12 +17,34 @@ class App {
     // 2. Make an initial XMLHttpRequest using Util.fetchJSON() to populate your <select> element
 
     const root = document.getElementById('root');
+    //Div at the very top where the menu for the repositories will be
+    Util.createAndAppend('div', root, {id: "topBlockMenu", class: "block"});
+    Util.createAndAppend('p', topBlockMenu, {text: "HYF Repositories: ", class: "title"} );
+    Util.createAndAppend('select', topBlockMenu, {id : "menuDisplay"});    
+    //Div of contennt : left and right div
+    Util.createAndAppend('div', root, {id: 'container', class: "block"});
+ 
+
+
+
     // ...
 
     try {
       // ...
       const repos = await Util.fetchJSON(url);
-      this.repos = repos.map(repo => new Repository(repo));
+      this.repos = repos
+      .sort((a, b) => a.name.localeCompare(b.name))
+      .map(repo => new Repository(repo));
+      repos.forEach((element, index) => {
+        Util.createAndAppend("option", menuDisplay, {text: element.name, value: index});
+      });
+      this.fetchContributorsAndRender(0);
+
+      let option = document.getElementById("menuDisplay");
+      option.onchange = select => {
+        let selectedItemIndex = option.selectedIndex;
+        this.fetchContributorsAndRender(selectedItemIndex);
+      };
       // ...
     } catch (error) {
       this.renderError(error);
@@ -52,10 +74,12 @@ class App {
       const container = document.getElementById('container');
       this.clearContainer(container);
 
-      const leftDiv = Util.createAndAppend('div', container);
-      const rightDiv = Util.createAndAppend('div', container);
+      const leftDiv = Util.createAndAppend('div', container, {class: "block"});
+      const rightDiv = Util.createAndAppend('div', container, {class: "block"});
 
       const contributorList = Util.createAndAppend('ul', rightDiv);
+      //adding
+      Util.createAndAppend("p", rightDiv, {class: "title", text: "Contributors"});
 
       repo.render(leftDiv);
 
@@ -72,8 +96,7 @@ class App {
    * @param {Error} error An Error object describing the error.
    */
   renderError(error) {
-    // Replace this comment with your code
-  }
+    Util.createAndAppend("div", root, {text: error.message, class: "alert-error"});  }
 }
 
 const HYF_REPOS_URL = 'https://api.github.com/orgs/HackYourFuture/repos?per_page=100';

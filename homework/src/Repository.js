@@ -14,8 +14,26 @@ class Repository {
    */
   render(parent) {
     //
-    // Replace this comment with your code
-    //
+    let table = Util.createAndAppend("table", parent, {id: "descriptionContent"});
+    let repoRow = Util.createAndAppend("tr", table);
+    //creating row for repository and link 
+    Util.createAndAppend("td", repoRow, {text:"Repository:"})
+    let repoLink = Util.createAndAppend("td", repoRow);
+    Util.createAndAppend("a", repoLink, {href: this.data.html_url,text: this.data.name , target: "_blank"})
+    //creating row for repo description 
+    let descriptionRow = Util.createAndAppend("tr", table);
+    Util.createAndAppend("td", descriptionRow, {text:"Description:"})
+    Util.createAndAppend("td", descriptionRow, {text: this.data.description});
+    //creating row for forks
+    let forkRow = Util.createAndAppend("tr", table);
+    Util.createAndAppend("td", forkRow, {text:"Fork:"})
+    Util.createAndAppend("td", forkRow, {text: this.data.forks_count});
+    // creating 'last time updated' row 
+    let updatedRow = Util.createAndAppend("tr", table);
+    Util.createAndAppend("td", updatedRow, {text:"Updated:"})
+    let date =  new Date (this.data.updated_at); 
+    date = date.toUTCString();
+    Util.createAndAppend("td", updatedRow, {text:date});    //
   }
 
   /**
